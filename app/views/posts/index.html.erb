@@ -1,0 +1,45 @@
+<%
+=begin%>
+    NOTE:
+ link index to show page 
+ FOLLOW REFACTORS 
+
+<%
+=end%>
+
+<%
+=begin%>
+        HARD:
+ <% @posts.each do |post| %>
+  <div><a href='<%= "/posts/#{post.id}" %>'><%= post.title %></a></div>
+<% end %> 
+<%
+=end%>
+
+<%
+=begin%>
+        REFACTORED TO REMOVE HREF & REDUCE ERB CALLS
+ <% @posts.each do |post| %>
+  <div><%= link_to post.title, "/posts/#{post.id}" %></div>
+<% end %> 
+<%
+=end%>
+
+<%
+=begin%>
+    REFACTORED TO REMOVE INTERPOLATION
+ <% @posts.each do |post| %>
+  <div><%= link_to post.title, post_path(post.id) %></div>
+<% end %> 
+<%
+=end%>
+<%
+=begin%>
+     REFACTORED SOLUTION BELOW 
+ you pass in the post object as an argument, it should use the ID attribute 
+<%
+=end%>
+
+<% @posts.each do |post| %>
+  <div><%= link_to post.title, post_path(post) %></div>
+<% end %>
